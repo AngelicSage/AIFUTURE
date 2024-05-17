@@ -1,20 +1,36 @@
+
 import streamlit as st
+import streamlit as st
+import random
 
 st.set_page_config(
-    page_title="Multipage App",
+    page_title="Angel AI",
     page_icon="👋",
 )
 
-st.title("Lessons")
-st.subheader("Use this feature for users to submit answers")
+st.title("Lesson 1")
 
-st.sidebar.success("Select a page above.")
+video_file = open('/Users/whybless/Documents/ai/angel_ai/0513(1).mov', 'rb')
+video_bytes = video_file.read()
 
-if "my_input" not in st.session_state:
-    st.session_state["my_input"] = ""
+st.video(video_bytes)
 
-my_input = st.text_input("Input a text here", st.session_state["my_input"])
-submit = st.button("Submit")
-if submit:
-    st.session_state["my_input"] = my_input
-    st.write("You have entered: ", my_input)
+st.subheader('Productivity tip:')
+st.write('Use split screen to reference the video while answering questions')
+
+# Add a column for the buttons
+col1, col2 = st.columns(2)
+
+# Create the 'Chat' button in the first column
+with col1:
+    chat_button = st.button("Chat")
+
+# Create the 'Lessons' button in the second column
+with col2:
+    quiz_button = st.button("Quiz")
+
+if chat_button:
+    st.switch_page('pages/Chat.py')
+
+if quiz_button:
+    st.switch_page('pages/Quiz.py')
