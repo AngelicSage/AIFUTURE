@@ -88,11 +88,14 @@ def main():
         chosen_equations.append(random_equation['question'])
 
         print(f"{random_equation['question']}")
-        answer = input("x = ")
         
-        if random_equation['options'].exists:
+        try:
             for option in random_equation['options']:
                 print(option)
+        except KeyError:
+            pass
+
+        answer = input("x = ")
 
         if answer == random_equation['answer']:
             question.reference.update({'Correct': True})
