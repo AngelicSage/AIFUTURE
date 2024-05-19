@@ -8,7 +8,7 @@ from image_logic import rand_img_set_size
 import yaml
 from yaml.loader import SafeLoader
 
-with open('/Users/whybless/Documents/ai/angel_ai/pages/config.YAML') as file:
+with open('pages/config.YAML') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 authenticator = stauth.Authenticate(
@@ -140,7 +140,7 @@ def submitClicked():
 
 def loadAssignment():
     if st.session_state["Assignment"] == None:
-        st.session_state["Assignment"] = Assignment('/Users/whybless/Downloads/Resources/Problems.xlsx') 
+        st.session_state["Assignment"] = Assignment('math_problems/Problems.xlsx') 
     return st.session_state["Assignment"]
     
 def displayAssignment(assignment):
@@ -152,7 +152,7 @@ def displayAssignment(assignment):
                         "Wrong": [st.session_state["Wrong"]]})
     
     st.dataframe(df.set_index(df.columns[0]))
-    rand_img_set_size(None, '/Users/whybless/Documents/ai/angel_ai/math_memes')
+    rand_img_set_size(None, 'math_memes')
     for index in range(assignment.numQuestions()):
         q = assignment.getQuestion(index)
         st.subheader(f"Question-{index+1}")

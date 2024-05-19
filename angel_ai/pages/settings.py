@@ -6,7 +6,7 @@ import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 
-with open('/Users/whybless/Documents/ai/angel_ai/pages/config.YAML') as file:
+with open('pages/config.YAML') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 authenticator = stauth.Authenticate(
@@ -81,6 +81,6 @@ if st.session_state["authentication_status"]:
     except Exception as e:
         st.error(e)
 # Updating the configuration file
-with open('/Users/whybless/Documents/ai/angel_ai/pages/config.YAML', 'w') as file:
+with open('pages/config.YAML', 'w') as file:
     yaml.dump(config, file, default_flow_style=False)
 

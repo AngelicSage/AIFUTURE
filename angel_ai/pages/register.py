@@ -6,7 +6,7 @@ from image_logic import rand_nice_origin_size_gifs
 from image_logic import rand_img_set_size
 
 # Load configuration from YAML file
-with open('/Users/whybless/Documents/ai/angel_ai/pages/config.YAML') as file:
+with open('pages/config.YAML') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 # Initialize the authenticator
@@ -28,12 +28,12 @@ if st.session_state["authentication_status"]:
     with col5[1]:
         login_button = st.button("Home")
     if login_button:
-        st.switch_page('/Users/whybless/Documents/ai/angel_ai/Home_Page.py')
+        st.switch_page('Home_Page.py')
     rand_nice_origin_size_gifs()
     
 else:
     try:
-        rand_img_set_size(None, '/Users/whybless/Documents/ai/angel_ai/sus_gifs')
+        rand_img_set_size(None, 'sus_gifs')
         email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
         col3 = st.columns(2)
 
@@ -59,10 +59,10 @@ else:
 
         if login_button:
             st.switch_page('pages/login.py')
-        rand_img_set_size(None, '/Users/whybless/Documents/ai/angel_ai/sus_gifs')
+        rand_img_set_size(None, 'sus_gifs')
 
 # Update configuration file
-with open('/Users/whybless/Documents/ai/angel_ai/pages/config.YAML', 'w') as file:
+with open('pages/config.YAML', 'w') as file:
     yaml.dump(config, file, default_flow_style=False)
 
 

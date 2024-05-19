@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 ###Authentication###
-with open('/Users/whybless/Documents/ai/angel_ai/pages/config.YAML') as file:
+with open('pages/config.YAML') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 authenticator = stauth.Authenticate(
@@ -57,17 +57,17 @@ col1, col2, col3 = st.columns(3)
 
 # First column - GIF
 with col1:
-    rand_img_set_size(100, '/Users/whybless/Documents/ai/angel_ai/stickers')
+    rand_img_set_size(100, 'stickers')
 
 # Second column - Video
 with col2:
-    video_file = open('/Users/whybless/Documents/ai/angel_ai/Appropriate_vid.mov', 'rb')
+    video_file = open('Appropriate_vid.mov', 'rb')
     video_bytes = video_file.read()
     st.video(video_bytes)
 
 # Third column - GIF
 with col3:
-    rand_img_set_size(100, '/Users/whybless/Documents/ai/angel_ai/stickers')
+    rand_img_set_size(100, 'stickers')
 
 st.subheader('Productivity tip:')
 st.write('Use split screen to reference the video while answering questions')

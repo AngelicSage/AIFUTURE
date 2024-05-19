@@ -7,7 +7,7 @@ from image_logic import rand_img_set_size
 import yaml
 from yaml.loader import SafeLoader
 
-with open('/Users/whybless/Documents/ai/angel_ai/pages/config.YAML') as file:
+with open('pages/config.YAML') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 authenticator = stauth.Authenticate(
@@ -30,7 +30,7 @@ if st.session_state["authentication_status"]:
     with col5[1]:
         login_button = st.button("Home")
     if login_button:
-        st.switch_page('/Users/whybless/Documents/ai/angel_ai/Home_Page.py')
+        st.switch_page('Home_Page.py')
     rand_nice_origin_size_gifs()
 elif st.session_state["authentication_status"] is False:
     st.error('Username/password is incorrect')
@@ -42,7 +42,7 @@ elif st.session_state["authentication_status"] is False:
 
     if register_button:
         st.switch_page('pages/register.py')
-    rand_img_set_size(None, '/Users/whybless/Documents/ai/angel_ai/sus_gifs')
+    rand_img_set_size(None, 'sus_gifs')
 elif st.session_state["authentication_status"] is None:
     st.warning('Please enter your username and password')
     col4 = st.columns(2)
@@ -53,9 +53,9 @@ elif st.session_state["authentication_status"] is None:
 
     if register_button:
         st.switch_page('pages/register.py')
-    rand_img_set_size(None, '/Users/whybless/Documents/ai/angel_ai/sus_gifs')
+    rand_img_set_size(None, 'sus_gifs')
     
 # Updating the configuration file
-with open('/Users/whybless/Documents/ai/angel_ai/pages/config.YAML', 'w') as file:
+with open('pages/config.YAML', 'w') as file:
     yaml.dump(config, file, default_flow_style=False)
 
