@@ -29,7 +29,7 @@ elif st.session_state["authentication_status"] is False:
 elif st.session_state["authentication_status"] is None:
     st.warning('Please enter your username and password')
 
-st.title('Settings')
+st.title('😦Settings😦')
 
 # Reset password
 if st.session_state["authentication_status"]:

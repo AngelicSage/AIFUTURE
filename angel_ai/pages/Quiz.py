@@ -24,43 +24,14 @@ if st.session_state["authentication_status"]:
     authenticator.logout()
     
 else:
-    # Add a column for the buttons
-    col4 = st.columns(2)
-
-    # Create the 'Chat' button in the first column
-
-
-    # Create the 'Lessons' button in the second column
-    with col4[1]:
+    # Create a column for the register button
+    col1, col2 = st.columns([1, 3])  # Adjust the ratio to position the button on the left
+    with col1:
         register_button = st.button("Register")
-
 
     if register_button:
         st.switch_page('pages/register.py')
         
-# update user details widget
-if st.session_state["authentication_status"]:
-    try:
-        if authenticator.update_user_details(st.session_state["username"]):
-            st.success('Entries updated successfully')
-    except Exception as e:
-        st.error(e)
-# Rangarajan Krishnamoorthy, March 24, 2024
-# Math MCQ Using Streamlit framework
-
-# Make sure the following packages are installed
-# Create and use a virtual environment
-
-# pip install xlrd
-# pip install openpyxl
-# pip install pandas
-# pip install streamlit
-
-
-
-
-
-
 class Question:
     def __init__(self, id, quest, op1, op2, op3, op4, ans):
         self.id = id
@@ -112,6 +83,8 @@ def initSessionVariables():
         st.session_state["Submitted"] = False
     if "Answers" not in st.session_state:
         st.session_state["Answers"] = {}
+    if "IncorrectAnswers" not in st.session_state:
+        st.session_state["IncorrectAnswers"] = {}
 
 def validateAnswers():
     assignment = st.session_state["Assignment"]
@@ -119,6 +92,8 @@ def validateAnswers():
     correct = 0; not_attempted = 0
     correct_answer = ""
     answers = st.session_state["Answers"]
+    incorrect_answers = {}
+    
     for index in range(total):
         q = assignment.getQuestion(index)
         submitted_answer = answers[q.id]
@@ -130,12 +105,19 @@ def validateAnswers():
         correct_answer = answer_list[correct_choice]
         if submitted_answer == correct_answer:
             correct += 1
+        else:
+            incorrect_answers[q.id] = {
+                "question": q.question,
+                "submitted": submitted_answer,
+                "correct": correct_answer
+            }
+    
     st.session_state["Correct"] = correct
     attempted = total - not_attempted
     st.session_state["Attempted"] = attempted
     st.session_state["Wrong"] = attempted - correct
+    st.session_state["IncorrectAnswers"] = incorrect_answers
     st.session_state["Answers"] = answers
-                
 
 def submitClicked():
     st.session_state["Submitted"] = True
@@ -144,12 +126,12 @@ def submitClicked():
 
 def loadAssignment():
     if st.session_state["Assignment"] == None:
-        st.session_state["Assignment"] = Assignment('math_problems/Problems.xlsx') 
+        st.session_state["Assignment"] = Assignment('math_problems/new_problems_Problems.xlsx') 
     return st.session_state["Assignment"]
     
 def displayAssignment(assignment):
     answers = {}
-    st.title("Math Quiz")
+    st.title("💀Math Quiz💀")
     df = pd.DataFrame({"Total Questions":[st.session_state["NumQuestions"]], 
                         "Attempted":[st.session_state["Attempted"]], 
                         "Correct":[st.session_state["Correct"]], 
@@ -167,12 +149,18 @@ def displayAssignment(assignment):
     st.session_state["Answers"] = answers
     st.button('Submit', disabled=st.session_state["Submitted"], on_click=submitClicked)
 
+    # Display incorrect answers if submitted
+    if st.session_state["Submitted"] and st.session_state["IncorrectAnswers"]:
+        st.subheader("Incorrect Answers")
+        for qid, info in st.session_state["IncorrectAnswers"].items():
+            st.write(f"**Question**: {info['question']}")
+            st.write(f"**Your Answer**: {info['submitted']}")
+            st.divider()
+
 # -------- Entry Point --------
 # Run: streamlit run MCQ.py
 initSessionVariables()
 displayAssignment(loadAssignment())
-
-
 
 # Retake button logic
 if st.session_state["Submitted"]:
@@ -182,5 +170,5 @@ if st.session_state["Submitted"]:
         st.session_state["Wrong"] = 0
         st.session_state["Submitted"] = False
         st.session_state["Answers"] = {}
+        st.session_state["IncorrectAnswers"] = {}
         st.experimental_rerun()
-

@@ -3,10 +3,6 @@ import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 
-st.set_page_config(
-    page_title="Angel Math",
-    page_icon="👋",
-)
 
 ###Authentication###
 with open('pages/config.YAML') as file:
@@ -25,16 +21,10 @@ if st.session_state["authentication_status"]:
     st.write(f'Welcome *{st.session_state["name"]}*')
     authenticator.logout()
 else:
-    # Add a column for the buttons
-    col4 = st.columns(2)
-
-    # Create the 'Chat' button in the first column
-
-
-    # Create the 'Lessons' button in the second column
-    with col4[1]:
+    # Create a column for the register button
+    col1, col2 = st.columns([1, 3])  # Adjust the ratio to position the button on the left
+    with col1:
         register_button = st.button("Register")
-
 
     if register_button:
         st.switch_page('pages/register.py')
@@ -44,7 +34,7 @@ else:
 import streamlit as st
 from image_logic import rand_img_set_size  # Import the rand_img_set_size function
 
-
+st.title("🫣Lessons🫣")
 video_file = open('Appropriate_vid.mov', 'rb')
 video_bytes = video_file.read()
 st.video(video_bytes)
