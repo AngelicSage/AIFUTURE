@@ -1,37 +1,8 @@
 import pandas as pd
 import streamlit as st
-import streamlit_authenticator as stauth
-import yaml
-from yaml.loader import SafeLoader
+from random import shuffle
 from image_logic import rand_img_set_size
-###Authentication###
-import yaml
-from yaml.loader import SafeLoader
 
-with open('pages/config.YAML') as file:
-    config = yaml.load(file, Loader=SafeLoader)
-
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days'],
-    config['pre-authorized']
-)
-authenticator.login()
-if st.session_state["authentication_status"]:
-    st.write(f'Welcome *{st.session_state["name"]}*')
-    authenticator.logout()
-    
-else:
-    # Create a column for the register button
-    col1, col2 = st.columns([1, 3])  # Adjust the ratio to position the button on the left
-    with col1:
-        register_button = st.button("Register")
-
-    if register_button:
-        st.switch_page('pages/register.py')
-        
 class Question:
     def __init__(self, id, quest, op1, op2, op3, op4, ans):
         self.id = id
@@ -126,7 +97,9 @@ def submitClicked():
 
 def loadAssignment():
     if st.session_state["Assignment"] == None:
-        st.session_state["Assignment"] = Assignment('math_problems/new_problems_Problems.xlsx') 
+        assignment = Assignment('math_problems/new_problems_Problems.xlsx') 
+        shuffle(assignment.questions)  # Shuffle the questions
+        st.session_state["Assignment"] = assignment
     return st.session_state["Assignment"]
     
 def displayAssignment(assignment):
@@ -171,4 +144,10 @@ if st.session_state["Submitted"]:
         st.session_state["Submitted"] = False
         st.session_state["Answers"] = {}
         st.session_state["IncorrectAnswers"] = {}
+        st.session_state["Assignment"] = None  # Force reload assignment
         st.experimental_rerun()
+
+
+
+
+ 
