@@ -30,6 +30,7 @@ elif st.session_state["authentication_status"] is None:
     st.warning('Please enter your username and password')
 
 st.title('Settings')
+
 # Reset password
 if st.session_state["authentication_status"]:
     try:
@@ -40,15 +41,12 @@ if st.session_state["authentication_status"]:
 
 
 # new user registration widget
-if st.session_state["authentication_status"]:
-    pass
-else:
-    try:
-        email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
-        if email_of_registered_user:
-            st.success('User registered successfully')
-    except Exception as e:
-        st.error(e)
+try:
+    email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
+    if email_of_registered_user:
+        st.success('User registered successfully')
+except Exception as e:
+    st.error(e)
 
 #forgot password widget
 try:

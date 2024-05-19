@@ -17,7 +17,6 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
     config['pre-authorized']
 )
-
 #calling
 authenticator.login()
 

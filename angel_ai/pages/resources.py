@@ -1,6 +1,6 @@
 import streamlit as st
 import streamlit_authenticator as stauth
-
+from image_logic import rand_img_set_size
 ###Authentication###
 import yaml
 from yaml.loader import SafeLoader
@@ -15,30 +15,37 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
     config['pre-authorized']
 )
+authenticator.login()
 
-if st.session_state["authentication_status"]:
-    st.write(f'Welcome *{st.session_state["name"]}*')
-    authenticator.logout()
-else:
-    # Add a column for the buttons
-    col3, col4 = st.columns(2)
-
-    # Create the 'Chat' button in the first column
-
-    with col3:
-        login_button = st.button("Log In")
-
-    # Create the 'Lessons' button in the second column
-    with col4:
-        register_button = st.button("Register")
-
-    if login_button:
-        st.switch_page('pages/login.py')
-
-    if register_button:
-        st.switch_page('pages/register.py')
    
+col1, col2, col3 = st.columns(3)
+
+# First column - GIF
+with col1:
+    rand_img_set_size(100, 'stickers')
+    if st.session_state["authentication_status"]:
+        st.write(f'Welcome *{st.session_state["name"]}*')
+    else:
+        register_button = st.button("Register", key="register_button")  # Manually assigned key
+        if register_button:
+            st.switch_page('pages/register.py')
+
+# Second column - Video
+with col2:
+    st.title('Resources')
+
+# Third column - GIF
+with col3:
+    rand_img_set_size(100, 'stickers')
+    
+
+
+
+
 #Resources
-st.title('Resources')
+
 st.header('Calculator')
 st.write('https://www.desmos.com/scientific')
+
+st.header('Graphing Calculator')
+st.write('https://www.desmos.com/calculator')

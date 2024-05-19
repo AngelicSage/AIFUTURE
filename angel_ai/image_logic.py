@@ -59,7 +59,7 @@ def rand_img_set_size(GIF_WIDTH, gif_directory):
 # random images w original sizes
 def rand_nice_origin_size_gifs():
     # Directory containing GIFs
-    gif_directory = '/Users/whybless/Documents/ai/angel_ai/nice_gifs'
+    gif_directory = 'nice_gifs'
     # Function to get a list of all GIF files in the directory
     def get_gif_files(directory):
         return [os.path.join(directory, file) for file in os.listdir(directory) if file.endswith('.gif')]

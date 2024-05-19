@@ -1,5 +1,5 @@
 # AIFUTURE
-1. Run the loading_model.ipynb notebook first 
+1. Run the import_libraries.ipynb notebook first 
 
 2. Go into the angel_ai directory
 
