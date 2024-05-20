@@ -1,3 +1,37 @@
+import streamlit as st
+import streamlit_authenticator as stauth
+import yaml
+from yaml.loader import SafeLoader
+
+
+###Authentication###
+with open('pages/config.YAML') as file:
+    config = yaml.load(file, Loader=SafeLoader)
+
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+    config['pre-authorized']
+)
+authenticator.login()
+
+if st.session_state["authentication_status"]:
+    st.write(f'Welcome *{st.session_state["name"]}*')
+    authenticator.logout()
+else:
+    # Create a column for the register button
+    col1, col2 = st.columns([1, 3])  # Adjust the ratio to position the button on the left
+    with col1:
+        register_button = st.button("Register")
+
+    if register_button:
+        st.switch_page('pages/register.py')
+   
+   
+   
+   
 import pandas as pd
 import streamlit as st
 from random import shuffle

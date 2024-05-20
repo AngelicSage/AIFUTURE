@@ -7,7 +7,7 @@ credentials:
     eternal_sage:
       email: argamedevelop@gmail.com
       failed_login_attempts: 0
-      logged_in: true
+      logged_in: false
       name: Angel Rodriguez
       password: $2b$12$5ab/74GUrT2U6IL6NeA4cuoohH8oy8oMFJyDEwOt29ZhtfPR1AYZi
     jsmith:
