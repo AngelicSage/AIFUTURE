@@ -1,23 +1,3 @@
-import subprocess
-import sys
-
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-# List of packages to ensure they are installed
-required_packages = [
-    "streamlit",
-    "hugchat",
-    "toml",
-    "streamlit_authenticator"
-]
-
-# Install each required package
-for package in required_packages:
-    install(package)
-    
-    
-
 import streamlit as st
 import streamlit_authenticator as stauth
 from image_logic import rand_img_set_size
