@@ -99,6 +99,7 @@ def loadAssignment():
     if st.session_state["Assignment"] == None:
         assignment = Assignment('math_problems/new_problems_Problems.xlsx') 
         shuffle(assignment.questions)  # Shuffle the questions
+        assignment.questions = assignment.questions[:5]
         st.session_state["Assignment"] = assignment
     return st.session_state["Assignment"]
     
