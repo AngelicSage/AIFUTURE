@@ -41,12 +41,15 @@ if st.session_state["authentication_status"]:
 
 
 # new user registration widget
-try:
-    email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
-    if email_of_registered_user:
-        st.success('User registered successfully')
-except Exception as e:
-    st.error(e)
+if st.session_state["authentication_status"]:
+    pass
+else:
+    try:
+        email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(pre_authorization=False)
+        if email_of_registered_user:
+            st.success('User registered successfully')
+    except Exception as e:
+        st.error(e)
 
 #forgot password widget
 try:
