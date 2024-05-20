@@ -6,9 +6,6 @@ https://github.com/mkhorasani/Streamlit-Authenticator
 ### LLM 
 https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps
 
-### Documentation
-Switched the name from Angel AI to Angel math
-
 ### Inspiration
 https://youtu.be/EFqVXsYFtbQ?si=MlrThLedHJi3VmFo
 
