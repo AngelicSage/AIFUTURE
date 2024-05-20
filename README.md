@@ -1,4 +1,4 @@
-# AIFUTURE
+# Instructions 
 1. Run the import_libraries.ipynb notebook first 
 
 2. Go into the angel_ai directory
