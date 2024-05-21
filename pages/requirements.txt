@@ -1,5 +1,5 @@
 streamlit
-hugchat
+hugchat==0.0.8
 streamlit_authenticator
 PyYAML
 openpyxl
