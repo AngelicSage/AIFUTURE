@@ -60,20 +60,26 @@ def initSessionVariables():
 def validateAnswers():
     assignment = st.session_state["Assignment"]
     total = assignment.numQuestions()
-    correct = 0; not_attempted = 0
-    correct_answer = ""
+    correct = 0
+    not_attempted = 0
     answers = st.session_state["Answers"]
     incorrect_answers = {}
-    
+
     for index in range(total):
         q = assignment.getQuestion(index)
-        submitted_answer = answers[q.id]
-        if submitted_answer == None:
+        submitted_answer = answers.get(q.id, None)
+        if submitted_answer is None:
             not_attempted += 1
             continue
-        correct_choice = int(q.answer) - 1
+
+        # Create a mapping of the options to their respective answers
         answer_list = [q.option1, q.option2, q.option3, q.option4]
-        correct_answer = answer_list[correct_choice]
+        
+        if q.answer not in answer_list:
+            st.error(f"Invalid answer '{q.answer}' for question ID {q.id}")
+            continue
+        
+        correct_answer = q.answer
         if submitted_answer == correct_answer:
             correct += 1
         else:
