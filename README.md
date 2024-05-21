@@ -28,6 +28,7 @@ Trying to combine HuggingFace account and account authentication (put a pause to
 * Looking at everything required in the submission is more important than rereading the instructions.
 
 ## What's next for Angel Math
+* Stronger chatbot model with text-to-speech with the voices used in our videos
 * A HuggingFace account is all that is needed to make user accounts, there will be no need to have 2 accounts
 * Communities built around this funny platform 
 * More added to resources, lessons, quizzes, 
