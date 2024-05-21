@@ -39,11 +39,11 @@ else:
         register_button = st.button("Register")
 
     if register_button:
-        st.switch_page('pages/register.py')
+        st.switch_page('angel_ai/pages/register.py')
 
 # Add the header and slogan and image
 st.title("🤯Angel Math🫣")
-st.image("images/OIG4.png", width=150)
+st.image("angel_ai/images/OIG4.png", width=150)
 st.subheader("😎Learn with Style😎")
 
 # Create the 'About website' section
@@ -74,7 +74,7 @@ with col4:
     lessons_button = st.button("Lessons")
 
 if chat_button:
-    st.switch_page('pages/Chat.py')
+    st.switch_page('angel_ai/pages/Chat.py')
 
 if lessons_button:
-    st.switch_page('pages/Lessons.py')
+    st.switch_page('angel_ai/pages/Lessons.py')
