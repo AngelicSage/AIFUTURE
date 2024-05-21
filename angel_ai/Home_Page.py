@@ -14,7 +14,7 @@ from yaml.loader import SafeLoader
 st.set_page_config(page_title="Angel Math", layout="wide")
 
 # Load the configuration file for authentication
-with open('pages/config.YAML') as file:
+with open('angel_ai/pages/config.YAML') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 # Initialize the authenticator
