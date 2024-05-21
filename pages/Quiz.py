@@ -98,9 +98,12 @@ def validateAnswers():
 
 
 def submitClicked():
-    st.session_state["Submitted"] = True
-    st.success("Your answers have been submitted!")
-    validateAnswers()
+    if "UserLoggedIn" in st.session_state and st.session_state["UserLoggedIn"]:
+        st.session_state["Submitted"] = True
+        st.success("Your answers have been submitted!")
+        validateAnswers()
+    else:
+        st.error("You must be signed in to submit answers.")
 
 def loadAssignment():
     if st.session_state["Assignment"] == None:
