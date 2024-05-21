@@ -3,7 +3,9 @@ import sys
 
 
 import os
-os.system('pip install PyYAML')
+os.system('pip install pyyaml')
+import os
+os.system('pip install yaml')
 import streamlit as st
 import streamlit_authenticator as stauth
 from image_logic import rand_img_set_size
