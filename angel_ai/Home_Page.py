@@ -1,3 +1,10 @@
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+install("PyYAML")
 import streamlit as st
 import streamlit_authenticator as stauth
 from image_logic import rand_img_set_size
