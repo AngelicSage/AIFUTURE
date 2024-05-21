@@ -1,16 +1,7 @@
 import streamlit as st
 from hugchat import hugchat
 from hugchat.login import Login
-import toml
-            
-def update_secrets_toml(email, password):
-    secrets_file_path = ".streamlit/secrets.toml"
-    with open(secrets_file_path, "r") as f:
-        secrets = toml.load(f)
-    secrets["EMAIL"] = email
-    secrets["PASS"] = password
-    with open(secrets_file_path, "w") as f:
-        toml.dump(secrets, f)
+
 # App title
 st.set_page_config(page_title="🤗💬 HugChat")
 
@@ -22,15 +13,12 @@ with st.sidebar:
         hf_email = st.secrets['EMAIL']
         hf_pass = st.secrets['PASS']
     else:
-        st.write("Don't have a HugggingFace account? Go to https://huggingface.co/join")
-        hf_email = st.text_input('Enter HuggingFace E-mail:', type='password')
-        hf_pass = st.text_input('Enter HuggingFace password:', type='password')
+        hf_email = st.text_input('Enter E-mail:', type='password')
+        hf_pass = st.text_input('Enter password:', type='password')
         if not (hf_email and hf_pass):
             st.warning('Please enter your credentials!', icon='⚠️')
         else:
             st.success('Proceed to entering your prompt message!', icon='👉')
-            update_secrets_toml(hf_email, hf_pass)
-            
     st.markdown('📖 Learn how to build this app in this [blog](https://blog.streamlit.io/how-to-build-an-llm-powered-chatbot-with-streamlit/)!')
     
 # Store LLM generated responses
