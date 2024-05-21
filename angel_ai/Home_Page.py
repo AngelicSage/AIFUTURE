@@ -58,9 +58,9 @@ col6, col7 = st.columns(2)
 
 # Display images side by side
 with col6:
-    rand_img_set_size(225, 'learning_memes')
+    rand_img_set_size(225, 'angel_ai/learning_memes')
 with col7:
-    rand_img_set_size(225, 'learning_memes')
+    rand_img_set_size(225, 'angel_ai/learning_memes')
 
 # Add a column for the buttons
 col3, col4 = st.columns(2)
