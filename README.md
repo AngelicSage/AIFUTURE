@@ -1,11 +1,3 @@
-# Instructions 
-1. Run the import_libraries.ipynb notebook first 
-
-2. Go into the angel_ai directory
-
-3. run "streamlit run Home_Page.py" in your terminal
-
-
 ## Inspiration
 Khan Academy
 Duolingo
@@ -18,8 +10,11 @@ We take learning with fun to the next level
 ## How we built it
 * We put the experiences of our users first and thought what would be the most fun for them 
 * We planned every step ahead of time 
-## Challenges we ran into
 
+## Challenges we ran into
+Account Authentication combined with frontend 
+Making the right code to use hugchat (HuggingFace Chatbot)
+Trying to combine HuggingFace account and account authentication (put a pause to)
 
 ## Accomplishments that we're proud of
 * We worked wonderfully as a team with great communication
