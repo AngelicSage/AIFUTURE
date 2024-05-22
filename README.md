@@ -1,6 +1,6 @@
 ## Inspiration
-Khan Academy
-Duolingo
+Khan Academy,
+Duolingo,
 Presidents play Minecraft
 
 ## What it does
