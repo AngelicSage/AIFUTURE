@@ -148,7 +148,7 @@ def loadAssignment():
 def displayAssignment(assignment):
     answers = {}
     st.title("💀Math Quiz💀")
-    df = pd.DataFrame({"Total Questions":[st.session_state["NumQuestions"]], 
+    df = pd.DataFrame({"Total Questions":[5], 
                         "Attempted":[st.session_state["Attempted"]], 
                         "Correct":[st.session_state["Correct"]], 
                         "Wrong": [st.session_state["Wrong"]]})
