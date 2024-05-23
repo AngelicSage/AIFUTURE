@@ -1,13 +1,19 @@
+
 import streamlit as st
 import streamlit_authenticator as stauth
+from image_logic import rand_img_set_size
 import yaml
 from yaml.loader import SafeLoader
 
+# Set the app title and logo
+st.set_page_config(page_title="Angel Math", layout="wide")
 
+# Load the configuration file for authentication
 ###Authentication###
 with open('pages/config.YAML') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
+# Initialize the authenticator
 authenticator = stauth.Authenticate(
     config['credentials'],
     config['cookie']['name'],
@@ -15,11 +21,17 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
     config['pre-authorized']
 )
+
+# Login logic
 authenticator.login()
 
 if st.session_state["authentication_status"]:
-    authenticator.logout()
     st.write(f'Welcome *{st.session_state["name"]}*')
+    authenticator.logout()
+
+else:
+    st.write(f'Welcome *{st.session_state["name"]}*')
+    st.title('Some content')
 elif st.session_state["authentication_status"] is False:
     st.error('Username/password is incorrect')
 elif st.session_state["authentication_status"] is None:
@@ -32,12 +44,50 @@ if not st.session_state["authentication_status"]:
 
     if register_button:
         st.switch_page('pages/register.py')
-   
-   
+
+
 import pandas as pd
 import streamlit as st
 from random import shuffle
 from image_logic import rand_img_set_size
+
+# Add the header and slogan and image
+st.title("🤯Angel Math🫣")
+st.image("images/OIG4.png", width=150)
+st.subheader("😎Learn with Style😎")
+
+# Create the 'About website' section
+with st.expander("About Website"):
+    st.write("""This is an app that makes learning fun! Rather than watching a boring math lesson, get taught by your favorite influencers!""")
+
+# Add the disclaimer
+st.warning("Disclaimer: These AI voices are not of the real people. AI technology is used to mimic these voices.")
+
+# Create columns
+col6, col7 = st.columns(2)
+
+# Display images side by side
+with col6:
+    rand_img_set_size(225, 'learning_memes')
+with col7:
+    rand_img_set_size(225, 'learning_memes')
+
+# Add a column for the buttons
+col3, col4 = st.columns(2)
+
+# Create the 'Chat' button in the first column
+with col3:
+    chat_button = st.button("Chat")
+
+# Create the 'Lessons' button in the second column
+with col4:
+    lessons_button = st.button("Lessons")
+
+if chat_button:
+    st.switch_page('pages/Chat.py')
+
+if lessons_button:
+    st.switch_page('pages/Lessons.py')
 
 class Question:
     def __init__(self, id, quest, op1, op2, op3, op4, ans):
@@ -56,10 +106,10 @@ class Assignment:
 
     def numQuestions(self):
         return len(self.questions)
-    
+
     def getQuestion(self, index):
         return self.questions[index]
-    
+
     def loadAssignment(self, excel_file):
         self.questions.clear()
         dataframe = pd.read_excel(excel_file)
@@ -110,11 +160,11 @@ def validateAnswers():
 
         # Create a mapping of the options to their respective answers
         answer_list = [q.option1, q.option2, q.option3, q.option4]
-        
+
         if q.answer not in answer_list:
             st.error(f"Invalid answer '{q.answer}' for question ID {q.id}")
             continue
-        
+
         correct_answer = q.answer
         if submitted_answer == correct_answer:
             correct += 1
@@ -124,7 +174,7 @@ def validateAnswers():
                 "submitted": submitted_answer,
                 "correct": correct_answer
             }
-    
+
     st.session_state["Correct"] = correct
     attempted = total - not_attempted
     st.session_state["Attempted"] = attempted
@@ -148,7 +198,7 @@ def loadAssignment():
         assignment.questions = assignment.questions[:5]
         st.session_state["Assignment"] = assignment
     return st.session_state["Assignment"]
-    
+
 def displayAssignment(assignment):
     answers = {}
     st.title("💀Math Quiz💀")
@@ -156,7 +206,7 @@ def displayAssignment(assignment):
                         "Attempted":[st.session_state["Attempted"]], 
                         "Correct":[st.session_state["Correct"]], 
                         "Wrong": [st.session_state["Wrong"]]})
-    
+
     st.dataframe(df.set_index(df.columns[0]))
     rand_img_set_size(None, 'math_memes')
     for index in range(assignment.numQuestions()):
@@ -193,8 +243,3 @@ if st.session_state["Submitted"]:
         st.session_state["IncorrectAnswers"] = {}
         st.session_state["Assignment"] = None  # Force reload assignment
         st.experimental_rerun()
-
-
-
-
- 
