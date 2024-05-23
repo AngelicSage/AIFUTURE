@@ -15,12 +15,18 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
     config['pre-authorized']
 )
-authenticator.login()
 
+authenticator.login()
 if st.session_state["authentication_status"]:
-    st.write(f'Welcome *{st.session_state["name"]}*')
     authenticator.logout()
-else:
+    st.write(f'Welcome *{st.session_state["name"]}*')
+    st.title('Some content')
+elif st.session_state["authentication_status"] is False:
+    st.error('Username/password is incorrect')
+elif st.session_state["authentication_status"] is None:
+    st.warning('Please enter your username and password')
+
+if not st.session_state["authentication_status"]:
     # Create a column for the register button
     col1, col2 = st.columns([1, 3])  # Adjust the ratio to position the button on the left
     with col1:
