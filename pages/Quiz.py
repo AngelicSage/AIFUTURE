@@ -135,13 +135,10 @@ def validateAnswers():
 
 
 def submitClicked():
-    if "UserLoggedIn" in st.session_state and st.session_state["UserLoggedIn"]:
-        st.session_state["Submitted"] = True
-        st.success("Your answers have been submitted!")
-        validateAnswers()
-    else:
-        st.error("You must be signed in to submit answers.")
-
+    st.session_state["Submitted"] = True
+    st.success("Your answers have been submitted!")
+    validateAnswers()
+        
 def loadAssignment():
     if st.session_state["Assignment"] == None:
         assignment = Assignment('math_problems/new_problems_Problems.xlsx') 
