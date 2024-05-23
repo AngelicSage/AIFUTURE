@@ -18,9 +18,14 @@ authenticator = stauth.Authenticate(
 authenticator.login()
 
 if st.session_state["authentication_status"]:
-    st.write(f'Welcome *{st.session_state["name"]}*')
     authenticator.logout()
-else:
+    st.write(f'Welcome *{st.session_state["name"]}*')
+    st.title('Some content')
+elif st.session_state["authentication_status"] is False:
+    st.error('Username/password is incorrect')
+elif st.session_state["authentication_status"] is None:
+    st.warning('Please enter your username and password')
+if not st.session_state["authentication_status"]:
     # Create a column for the register button
     col1, col2 = st.columns([1, 3])  # Adjust the ratio to position the button on the left
     with col1:
@@ -130,10 +135,12 @@ def validateAnswers():
 
 
 def submitClicked():
-    st.session_state["Submitted"] = True
-    st.success("Your answers have been submitted!")
-    validateAnswers()
-    st.error("You must be signed in to submit answers.")
+    if "UserLoggedIn" in st.session_state and st.session_state["UserLoggedIn"]:
+        st.session_state["Submitted"] = True
+        st.success("Your answers have been submitted!")
+        validateAnswers()
+    else:
+        st.error("You must be signed in to submit answers.")
 
 def loadAssignment():
     if st.session_state["Assignment"] == None:
@@ -161,10 +168,7 @@ def displayAssignment(assignment):
         answers[q.id] = r
         st.divider()
     st.session_state["Answers"] = answers
-    if st.session_state["authentication_status"]:
-        st.button('Submit', disabled=st.session_state["Submitted"], on_click=submitClicked)
-    else: 
-        st.warning("you must sign in first to submit this quiz")
+    st.button('Submit', disabled=st.session_state["Submitted"], on_click=submitClicked)
 
     # Display incorrect answers if submitted
     if st.session_state["Submitted"] and st.session_state["IncorrectAnswers"]:
