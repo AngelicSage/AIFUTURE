@@ -163,7 +163,10 @@ def displayAssignment(assignment):
         answers[q.id] = r
         st.divider()
     st.session_state["Answers"] = answers
-    st.button('Submit', disabled=st.session_state["Submitted"], on_click=submitClicked)
+    if st.session_state["authentication_status"]:
+        st.button('Submit', disabled=st.session_state["Submitted"], on_click=submitClicked)
+    else: 
+        st.warning("you must sign in first to submit this quiz"
 
     # Display incorrect answers if submitted
     if st.session_state["Submitted"] and st.session_state["IncorrectAnswers"]:
