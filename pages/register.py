@@ -22,10 +22,15 @@ authenticator = stauth.Authenticate(
 authenticator.login()
 # New user registration widget
 if st.session_state["authentication_status"]:
-    st.write(f'Welcome *{st.session_state["name"]}*')
     authenticator.logout()
-    st.title('You Are Already Signed In')
-    
+    st.write(f'Welcome *{st.session_state["name"]}*')
+elif st.session_state["authentication_status"] is False:
+    st.error('Username/password is incorrect')
+elif st.session_state["authentication_status"] is None:
+    st.warning('Please enter your username and password')
+if not st.session_state["authentication_status"]:
+    st.warning("Scroll down if you're a new user")
+if st.session_state["authentication_status"]:
     # Create a column for the Home button and align it to the left
     col1, _ = st.columns([1, 3])
     with col1:
