@@ -166,7 +166,7 @@ def displayAssignment(assignment):
     if st.session_state["authentication_status"]:
         st.button('Submit', disabled=st.session_state["Submitted"], on_click=submitClicked)
     else: 
-        st.warning("you must sign in first to submit this quiz"
+        st.warning("you must sign in first to submit this quiz")
 
     # Display incorrect answers if submitted
     if st.session_state["Submitted"] and st.session_state["IncorrectAnswers"]:
