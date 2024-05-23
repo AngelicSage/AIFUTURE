@@ -35,7 +35,7 @@ import streamlit as st
 from image_logic import rand_img_set_size  # Import the rand_img_set_size function
 
 st.title("🫣Lessons🫣")
-video_file = open('Appropriate_vid.mov', 'rb')
+video_file = open('no_politics.mov', 'rb')
 video_bytes = video_file.read()
 st.video(video_bytes)
 st.subheader('Productivity tip:')
